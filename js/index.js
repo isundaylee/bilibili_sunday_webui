@@ -11,6 +11,32 @@ Storage.prototype.getObject = function(key) {
     return JSON.parse(this.getItem(key));
 }
 
+function urls_list_name() {
+	var url = window.location.search.substring(1)
+	var vars = url.split('&')
+
+	for (var i=0; i<vars.length; i++) {
+		var ps = vars[i].split('=')
+
+		if (ps[0] == 'l')
+			return ps[1]
+	}
+}
+
+function upload(key, content, callback) {
+	key = 'bilibili_sunday_webui_urls-' + key
+	url = 'http://ljh.me/simple_access.php?action=write&key=' + key + '&content=' + Base64.encode(content)
+
+	$.ajax({url: url, async: false, success: callback})
+}
+
+function download(key, callback) {
+	key = 'bilibili_sunday_webui_urls-' + key
+	url = 'http://ljh.me/simple_access.php?action=read&key=' + key
+
+	$.ajax({url: url, async: false, success: callback})
+}
+
 function rpc_call(method, params, callback) {
 	data = {
 		id: 'bilibili_sunday_webui', 
@@ -43,7 +69,7 @@ function goto_url(url)
 
 function reload_urls()
 {
-	var urls = localStorage.getObject('urls') || []
+	var urls = getURLs(); 
 	$('#urls').html('')
 
 	console.log(urls)
@@ -64,7 +90,7 @@ function update_urls()
 	if (gcid == 0 || gtitle == '')
 		return
 
-	urls = localStorage.getObject('urls') || []
+	urls = getURLs(); 
 
 	for (var i=0; i<urls.length; i++) {
 		if (urls[i].cid == gcid)
@@ -73,7 +99,7 @@ function update_urls()
 
 	urls.push({url: gurl, cid: gcid, title: gtitle})
 
-	localStorage.setObject('urls', urls)
+	setURLs(urls); 
 
 	reload_urls()
 }
@@ -153,8 +179,33 @@ function update_status(cid, c) {
 	})
 }
 
+function getURLs() {
+	if (urls_list_name()) {
+		download(urls_list_name(), function(content) {
+			if (content == '')
+				URLs = []
+			else {
+				console.log(content)
+				URLs = JSON.parse(content)
+			}
+		})
+		return URLs
+	}	else {
+		return localStorage.getObject('urls'); 
+	}
+}
+
+function setURLs(urls) {
+	if (urls_list_name()) {
+		upload(urls_list_name(), JSON.stringify(urls), function(content) {})
+		URLs = urls
+	}	else {
+		localStorage.setObject('urls', urls); 
+	}
+}
+
 function on_url_submit() {
-	var urls = localStorage.getObject('urls')
+	var urls = getURLs(); 
 	var url = $.trim($('#url-input').val())
 	$('#title').html('')
 	$('#progresses').html('')
