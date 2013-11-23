@@ -157,7 +157,7 @@ function update_status(cid, c) {
 		if (c != counter) return
 		$('#progresses').html('')
 		if (data.result.status == 'complete')
-			$('#status').html('<a href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>')
+			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>')
 		else
 			$('#status').html(data.result.status)
 		for (var i=0; i<data.result.downloads.length; i++) {
