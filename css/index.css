@@ -1,3 +1,11 @@
 .divider {
 	height: 25px; 
 }
+
+#urls {
+	margin-top: 20px;
+}
+
+#urls div {
+	margin-top: 10px; 
+}
