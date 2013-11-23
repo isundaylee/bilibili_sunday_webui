@@ -15,9 +15,7 @@ function rpc_call(method, params, callback) {
 
 function load_url(url) {
 	counter = counter + 1
-	if (itv != 0) clearInterval(itv)
 		
-	$('#status').html('')
 	rpc_call('cid_for_video_url', [url], function(data) {
 		load_cid(data.result, counter)
 	})
@@ -98,6 +96,10 @@ function update_status(cid, c) {
 
 function on_url_submit() {
 	url = $.trim($('#url-input').val())
+	$('#title').html('')
+	$('#progresses').html('')
+	$('#status').html('')
+	if (itv != 0) clearInterval(itv)
 	load_url(url)
 	return false
 }
