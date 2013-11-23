@@ -43,7 +43,7 @@ function update_status_quick(cid, c) {
 	rpc_call('query_status', [cid], function(data) {
 		if (c != counter) return
 		if (data.result.status == 'complete')
-			$('#status').html('<a href="' + encodeURIComponent('http://ljh.me/direct_access.php?path=data.result.path') + '">complete</a>')
+			$('#status').html('<a href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>')
 		else
 			$('#status').html(data.result.status)
 		for (var i=num; i<data.result.downloads.length; i++) {
