@@ -24,15 +24,19 @@ function urls_list_name() {
 }
 
 function hide_urls() {
+	$('#urls-encoded-panel').fadeOut(300)
 	$('#urls-panel').fadeOut(300)
 }
 
 function show_urls() {
+	$('#urls-encoded-panel').fadeOut(300)
 	$('#urls-panel').fadeIn(300)
 }
 
-function save_urls() {
-	window.prompt('URLs Mystified! ', Base64.encode(JSON.stringify(getURLs())))
+function encode_urls() {
+	$('#urls-panel').fadeOut(300)
+	$('#urls-encoded').text(Base64.encode(JSON.stringify(getURLs())))
+	$('#urls-encoded-panel').fadeIn(300)
 }
 
 function load_urls() {
@@ -220,7 +224,7 @@ function getURLs() {
 	// 	})
 	// 	return URLs
 	// }	else {
-		return localStorage.getObject('urls'); 
+		return localStorage.getObject('urls') || []; 
 	// }
 }
 

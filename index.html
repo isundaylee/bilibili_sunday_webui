@@ -46,15 +46,18 @@
     </div>
 
     <div class="row" id="urls-visibility-buttons">
-      <div class="small-6 column">
+      <div class="small-4 column">
         <a href="javascript: show_urls(); " class="button" id="show-urls-btn">Show URLs</a>
       </div>
-      <div class="small-6 column">
+      <div class="small-4 column">
         <a href="javascript: hide_urls(); " class="button" id="hide-urls-btn">Hide URLs</a>
+      </div>
+      <div class="small-4 column">
+        <a href="javascript: encode_urls(); " class="button" id="encode-urls-btn">Encode URLs</a>
       </div>
     </div>
 
-    <div  id="urls-panel">
+    <div id="urls-panel">
       <div class="row">
         <div class="small-12 column" id="urls">
           <a href='#'>http://www.bilibili.tv/video/av823591/</a>
@@ -63,14 +66,19 @@
       <div class="divider"></div>
     </div>
 
-    <div class="row" id="urls-buttons">
-      <div class="small-4 column">
-        <a href="javascript: save_urls(); " class="button" id="save-urls-btn">Save URLs</a>
+    <div id="urls-encoded-panel">
+      <div class="row">
+        <div class="small-12 column" id="urls-encoded">
+        </div>
       </div>
-      <div class="small-4 column">
+      <div class="divider"></div>
+    </div>
+
+    <div class="row" id="urls-buttons">
+      <div class="small-6 column">
         <a href="javascript: load_urls(); " class="button" id="load-urls-btn">Load URLs</a>
       </div>
-      <div class="small-4 column">
+      <div class="small-6 column">
         <a href="javascript: clear_urls(); " class="button" id="clear-urls-btn">Clear URLs</a>
       </div>
     </div>

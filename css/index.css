@@ -14,6 +14,15 @@
   margin-top: 30px; 
 }*/
 
-#save-urls-btn, #load-urls-btn, #clear-urls-btn, #show-urls-btn, #hide-urls-btn {
+#encode-urls-btn, #load-urls-btn, #clear-urls-btn, #show-urls-btn, #hide-urls-btn {
   width: 100%; 
+}
+
+
+#urls-encoded-panel {
+	display: none; 
+}
+
+#urls-encoded {
+	word-wrap: break-word;
 }
