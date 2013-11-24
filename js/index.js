@@ -23,6 +23,14 @@ function urls_list_name() {
 	}
 }
 
+function hide_urls() {
+	$('#urls-panel').fadeOut(300)
+}
+
+function show_urls() {
+	$('#urls-panel').fadeIn(300)
+}
+
 function save_urls() {
 	window.prompt('URLs Mystified! ', Base64.encode(JSON.stringify(getURLs())))
 }

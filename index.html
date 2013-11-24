@@ -45,13 +45,23 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="small-12 column" id="urls">
-        <a href='#'>http://www.bilibili.tv/video/av823591/</a>
+    <div class="row" id="urls-visibility-buttons">
+      <div class="small-6 column">
+        <a href="javascript: show_urls(); " class="button" id="show-urls-btn">Show URLs</a>
+      </div>
+      <div class="small-6 column">
+        <a href="javascript: hide_urls(); " class="button" id="hide-urls-btn">Hide URLs</a>
       </div>
     </div>
 
-    <div class="divider"></div>
+    <div  id="urls-panel">
+      <div class="row">
+        <div class="small-12 column" id="urls">
+          <a href='#'>http://www.bilibili.tv/video/av823591/</a>
+        </div>
+      </div>
+      <div class="divider"></div>
+    </div>
 
     <div class="row" id="urls-buttons">
       <div class="small-4 column">
