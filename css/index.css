@@ -17,3 +17,9 @@
 #save-urls-btn, #load-urls-btn, #clear-urls-btn, #show-urls-btn, #hide-urls-btn {
   width: 100%; 
 }
+
+.error .meter {
+  background: #cc0000;
+  height: 100%;
+  display: block; 
+}
