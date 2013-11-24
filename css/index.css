@@ -14,7 +14,7 @@
   margin-top: 30px; 
 }*/
 
-#save-urls-btn, #load-urls-btn, #clear-urls-btn, #show-urls-btn, #hide-urls-btn {
+#retry-btn, save-urls-btn, #load-urls-btn, #clear-urls-btn, #show-urls-btn, #hide-urls-btn {
   width: 100%; 
 }
 
