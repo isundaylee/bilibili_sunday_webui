@@ -297,8 +297,6 @@ function upload_urls() {
 function download_urls() {
 	if (urls_list_name()) {
 		download(urls_list_name(), function(content) {
-
-			alert(content)
 			var u = JSON.parse(Base64.decode(content))
 			var l = u.length
 
