@@ -23,6 +23,25 @@ function urls_list_name() {
 	}
 }
 
+function save_urls() {
+	window.prompt('URLs Mystified! ', Base64.encode(JSON.stringify(getURLs())))
+}
+
+function load_urls() {
+	str = window.prompt('What is the mystified URLs? ')
+	obj = JSON.parse(Base64.decode(str))
+	setURLs(obj)
+	reload_urls()
+}
+
+function clear_urls() {
+	if (window.confirm("Really throw away all of us??? "))
+	{
+		setURLs([])
+		reload_urls()
+	}
+}
+
 function upload(key, content, callback) {
 	key = 'bilibili_sunday_webui_urls-' + key
 	url = 'http://ljh.me/simple_access.php?action=write&key=' + key + '&content=' + Base64.encode(content)
@@ -180,28 +199,28 @@ function update_status(cid, c) {
 }
 
 function getURLs() {
-	if (urls_list_name()) {
-		download(urls_list_name(), function(content) {
-			if (content == '')
-				URLs = []
-			else {
-				console.log(content)
-				URLs = JSON.parse(content)
-			}
-		})
-		return URLs
-	}	else {
+	// if (urls_list_name()) {
+	// 	download(urls_list_name(), function(content) {
+	// 		if (content == '')
+	// 			URLs = []
+	// 		else {
+	// 			console.log(content)
+	// 			URLs = JSON.parse(content)
+	// 		}
+	// 	})
+	// 	return URLs
+	// }	else {
 		return localStorage.getObject('urls'); 
-	}
+	// }
 }
 
 function setURLs(urls) {
-	if (urls_list_name()) {
-		upload(urls_list_name(), JSON.stringify(urls), function(content) {})
-		URLs = urls
-	}	else {
+	// if (urls_list_name()) {
+	// 	upload(urls_list_name(), JSON.stringify(urls), function(content) {})
+	// 	URLs = urls
+	// }	else {
 		localStorage.setObject('urls', urls); 
-	}
+	// }
 }
 
 function on_url_submit() {

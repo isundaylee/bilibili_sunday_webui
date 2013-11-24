@@ -20,7 +20,7 @@
     <div class="divider"></div>
 
     <div class="row">
-      <div class="small-10 small-offset-1">
+      <div class="small-12 column">
         <form id="url-input-form">
           <input id="url-input" type="text" placeholder="Bilibili video URL. " />
         </form>
@@ -28,29 +28,43 @@
     </div>
 
     <div class="row">
-      <div class="small-10 small-offset-1">
+      <div class="small-12 column">
         <h3 id="title">Welcome to Bilibili Sunday! </h3>
       </div>
     </div>
 
     <div class="row">
-      <div class="small-10 small-offset-1">
+      <div class="small-12 column">
         <h4 id="status">active</h4>
       </div>
     </div>
 
     <div class="row">
-      <div class="small-10 small-offset-1" id="progresses">
+      <div class="small-12 column" id="progresses">
 
       </div>
     </div>
 
     <div class="row">
-      <div class="small-10 small-offset-1" id="urls">
+      <div class="small-12 column" id="urls">
         <a href='#'>http://www.bilibili.tv/video/av823591/</a>
       </div>
     </div>
-    
+
+    <div class="divider"></div>
+
+    <div class="row" id="urls-buttons">
+      <div class="small-4 column">
+        <a href="javascript: save_urls(); " class="button" id="save-urls-btn">Save URLs</a>
+      </div>
+      <div class="small-4 column">
+        <a href="javascript: load_urls(); " class="button" id="load-urls-btn">Load URLs</a>
+      </div>
+      <div class="small-4 column">
+        <a href="javascript: clear_urls(); " class="button" id="clear-urls-btn">Clear URLs</a>
+      </div>
+    </div>
+
     <script src="js/jquery.js"></script>
     <script src="js/foundation.min.js"></script>
     <!-- // <script src="js/json/json.js"></script> -->
