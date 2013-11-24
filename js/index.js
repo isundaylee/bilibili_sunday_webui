@@ -73,16 +73,18 @@ function clear_urls() {
 
 function upload(key, content, callback) {
 	var key = 'bilibili_sunday_webui_urls-' + key
-	var url = 'http://ljh.me/simple_access.php?action=write&key=' + key + '&content=' + Base64.encode(content)
+	var url = 'http://ljh.me/simple_access.php'
+	var data = 'action=write&key=' + key + '&content=' + Base64.encode(content)
 
-	$.ajax({url: url, async: false, success: callback})
+	$.ajax({url: url, async: false, success: callback, method: 'post', data: data})
 }
 
 function download(key, callback) {
 	var key = 'bilibili_sunday_webui_urls-' + key
-	var url = 'http://ljh.me/simple_access.php?action=read&key=' + key
+	var url = 'http://ljh.me/simple_access.php'
+	var data = 'action=read&key=' + key
 
-	$.ajax({url: url, async: false, success: callback})
+	$.ajax({url: url, async: false, success: callback, method: 'post', data: data})
 }
 
 function rpc_call(method, params, callback) {
@@ -295,6 +297,8 @@ function upload_urls() {
 function download_urls() {
 	if (urls_list_name()) {
 		download(urls_list_name(), function(content) {
+
+			alert(content)
 			var u = JSON.parse(Base64.decode(content))
 			var l = u.length
 
