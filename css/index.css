@@ -18,11 +18,16 @@
   width: 100%; 
 }
 
-
 #urls-encoded-panel {
 	display: none; 
 }
 
 #urls-encoded {
 	word-wrap: break-word;
+}
+
+.error .meter {
+  background: #cc0000;
+  height: 100%;
+  display: block; 
 }

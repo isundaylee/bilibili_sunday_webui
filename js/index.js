@@ -159,7 +159,7 @@ function update_status_quick(cid, c) {
 	rpc_call('query_status', [cid], function(data) {
 		if (c != counter) return
 		if (data.result.status == 'complete')
-			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>')
+			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>' + ' <a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
 		else
 			$('#status').html(data.result.status)
 		var pct
@@ -169,15 +169,17 @@ function update_status_quick(cid, c) {
 		}
 		for (var i=0; i<data.result.downloads.length; i++) {
 			pct = Math.floor(100 * data.result.downloads[i].status.progress) + '%'
-			if (data.result.downloads[i].status.status == 'waiting')
+			if (data.result.downloads[i].status.status == 'waiting' || data.result.downloads[i].status.status == 'error')
 				pct = '100%'
 			$('#progress' + i).css('width', pct)
 			if (data.result.downloads[i].status.status == 'complete')
-				$('#progresso' + i).removeClass('alert success').addClass('success')
+				$('#progresso' + i).removeClass('alert success error').addClass('success')
 			else if (data.result.downloads[i].status.status == 'waiting')
-				$('#progresso' + i).removeClass('alert success').addClass('alert')
+				$('#progresso' + i).removeClass('alert success error').addClass('alert')
+			else if (data.result.downloads[i].status.status == 'error')
+				$('#progresso' + i).removeClass('alert success error').addClass('error')
 			else
-				$('#progresso' + i).removeClass('alert success')
+				$('#progresso' + i).removeClass('alert success error')
 		}
 		num = data.result.downloads.length
 	})	
@@ -189,21 +191,23 @@ function update_status(cid, c) {
 		if (c != counter) return
 		$('#progresses').html('')
 		if (data.result.status == 'complete')
-			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>')
+			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>' + ' <a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
 		else
 			$('#status').html(data.result.status)
 		for (var i=0; i<data.result.downloads.length; i++) {
 			var pct 
 			pct = Math.floor(100 * data.result.downloads[i].status.progress) + '%'
-			if (data.result.downloads[i].status.status == 'waiting')
+			if (data.result.downloads[i].status.status == 'waiting' || data.result.downloads[i].status.status == 'error')
 				pct = '100%'
 			$('#progresses').append('<div class="progress" id="progresso' + i + '"><div class="meter" style="width: ' + pct + '" id="progress' + i + '"></div></div>')
 			if (data.result.downloads[i].status.status == 'complete')
-				$('#progresso' + i).removeClass('alert success').addClass('success')
+				$('#progresso' + i).removeClass('alert success error').addClass('success')
 			else if (data.result.downloads[i].status.status == 'waiting')
-				$('#progresso' + i).removeClass('alert success').addClass('alert')
+				$('#progresso' + i).removeClass('alert success error').addClass('alert')
+			else if (data.result.downloads[i].status.status == 'error')
+				$('#progresso' + i).removeClass('alert success error').addClass('error')
 			else
-				$('#progresso' + i).removeClass('alert success')
+				$('#progresso' + i).removeClass('alert success error')
 		}
 		num = data.result.downloads.length
 		itv = setInterval(function() {
