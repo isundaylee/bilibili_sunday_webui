@@ -28,8 +28,8 @@ function save_urls() {
 }
 
 function load_urls() {
-	str = window.prompt('What is the mystified URLs? ')
-	obj = JSON.parse(Base64.decode(str))
+	var str = window.prompt('What is the mystified URLs? ')
+	var obj = JSON.parse(Base64.decode(str))
 	setURLs(obj)
 	reload_urls()
 }
@@ -43,27 +43,27 @@ function clear_urls() {
 }
 
 function upload(key, content, callback) {
-	key = 'bilibili_sunday_webui_urls-' + key
-	url = 'http://ljh.me/simple_access.php?action=write&key=' + key + '&content=' + Base64.encode(content)
+	var key = 'bilibili_sunday_webui_urls-' + key
+	var url = 'http://ljh.me/simple_access.php?action=write&key=' + key + '&content=' + Base64.encode(content)
 
 	$.ajax({url: url, async: false, success: callback})
 }
 
 function download(key, callback) {
-	key = 'bilibili_sunday_webui_urls-' + key
-	url = 'http://ljh.me/simple_access.php?action=read&key=' + key
+	var key = 'bilibili_sunday_webui_urls-' + key
+	var url = 'http://ljh.me/simple_access.php?action=read&key=' + key
 
 	$.ajax({url: url, async: false, success: callback})
 }
 
 function rpc_call(method, params, callback) {
-	data = {
+	var data = {
 		id: 'bilibili_sunday_webui', 
 		method: 'bilibili_sunday.' + method, 
 		params: Base64.encode(JSON.stringify(params))
 	}
 
-	query = 'id=' + encodeURIComponent(data.id) + '&method=' + encodeURIComponent(data.method) + '&params=' + encodeURIComponent(data.params)
+	var query = 'id=' + encodeURIComponent(data.id) + '&method=' + encodeURIComponent(data.method) + '&params=' + encodeURIComponent(data.params)
 
 	$.getJSON("http://ljh.me:10753/jsonrpc?" + query, callback)
 }
@@ -109,7 +109,7 @@ function update_urls()
 	if (gcid == 0 || gtitle == '')
 		return
 
-	urls = getURLs(); 
+	var urls = getURLs(); 
 
 	for (var i=0; i<urls.length; i++) {
 		if (urls[i].cid == gcid)
@@ -150,6 +150,7 @@ function update_status_quick(cid, c) {
 			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>')
 		else
 			$('#status').html(data.result.status)
+		var pct
 		for (var i=num; i<data.result.downloads.length; i++) {
 			pct = Math.floor(100 * data.result.downloads[i].status.progress) + '%'
 			$('#progresses').append('<div class="progress"><div class="meter" style="width: ' + pct + '" id="progress' + i + '"></div></div>') 
@@ -180,6 +181,7 @@ function update_status(cid, c) {
 		else
 			$('#status').html(data.result.status)
 		for (var i=0; i<data.result.downloads.length; i++) {
+			var pct 
 			pct = Math.floor(100 * data.result.downloads[i].status.progress) + '%'
 			if (data.result.downloads[i].status.status == 'waiting')
 				pct = '100%'
