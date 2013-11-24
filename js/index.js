@@ -125,7 +125,7 @@ function reload_urls()
 	for (var i=0; i<urls.length; i++) {
 		var url = urls[i]
 		var up = url.url
-		
+
 		if (gfilter != '' && url.title.indexOf(gfilter) < 0)
 			continue
 
@@ -280,6 +280,32 @@ function on_search_change() {
 	content = $('#url-search-input').val()
 	gfilter = content
 	reload_urls()
+}
+
+function upload_urls() {
+	if (urls_list_name()) {
+		upload(urls_list_name(), Base64.encode(JSON.stringify(getURLs())), function() {
+			alert('Hurray! Uploads complete! ')
+		})
+	} else {
+		alert('You don\'t have a name! ')
+	}
+}
+
+function download_urls() {
+	if (urls_list_name()) {
+		download(urls_list_name(), function(content) {
+			var u = JSON.parse(Base64.decode(content))
+			var l = u.length
+
+			if (window.confirm('Really to replace me with a size-' + l + ' thing?? ')) {
+				setURLs(u)
+				reload_urls()
+			}
+		})
+	} else {
+		alert('You don\'t have a name! ')
+	}
 }
 
 $(document).ready(function() {
