@@ -3,6 +3,7 @@ itv = 0
 gcid = 0
 gtitle = ''
 gurl = ''
+gfilter = ''
 
 Storage.prototype.setObject = function(key, value) {
     this.setItem(key, JSON.stringify(value));
@@ -124,6 +125,10 @@ function reload_urls()
 	for (var i=0; i<urls.length; i++) {
 		var url = urls[i]
 		var up = url.url
+		
+		if (gfilter != '' && url.title.indexOf(gfilter) < 0)
+			continue
+
 		$('#urls').append('<div><a id="url' + i + "\" href=\"javascript: goto_url('" + up + "'); \">" + url.title + '</a></div>')
 			// $('#url' + i).click(function() {
 			// 	$('#url-input').val(up)
@@ -271,8 +276,14 @@ function on_url_submit() {
 	return false
 }
 
+function on_search_change() {
+	content = $('#url-search-input').val()
+	gfilter = content
+	reload_urls()
+}
 
 $(document).ready(function() {
 	$('#url-input-form').submit(on_url_submit)
+	$('#url-search-input').keyup(on_search_change)
 	reload_urls()
 })
