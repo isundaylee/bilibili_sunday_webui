@@ -4,6 +4,7 @@ gcid = 0
 gtitle = ''
 gurl = ''
 gfilter = ''
+ginit = false
 
 Storage.prototype.setObject = function(key, value) {
     this.setItem(key, JSON.stringify(value));
@@ -163,6 +164,9 @@ function load_title(title, c) {
 	$('#title').html(title)
 	gtitle = title
 
+	if (!ginit && gcid != 0)
+		update_status(gcid, c) 
+
 	update_urls()
 }
 
@@ -182,7 +186,7 @@ function update_status_quick(cid, c) {
 	rpc_call('query_status', [cid], function(data) {
 		if (c != counter) return
 		if (data.result.status == 'complete')
-			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>' + ' <a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
+			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=' + gtitle + '">complete</a>' + ' <a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
 		else
 			$('#status').html(data.result.status)
 		var pct
@@ -212,9 +216,11 @@ function update_status(cid, c) {
 	if (c != counter) return
 	rpc_call('query_status', [cid], function(data) {
 		if (c != counter) return
+		if (gtitle == '') return
+		ginit = true
 		$('#progresses').html('')
 		if (data.result.status == 'complete')
-			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '">complete</a>' + ' <a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
+			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=' + gtitle + '">complete</a>' + ' <a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
 		else
 			$('#status').html(data.result.status)
 		for (var i=0; i<data.result.downloads.length; i++) {
@@ -273,6 +279,7 @@ function on_url_submit() {
 	gcid = 0
 	gtitle = ''
 	gurl = url
+	ginit = false
 	if (itv != 0) clearInterval(itv)
 	load_url(url)
 	return false
