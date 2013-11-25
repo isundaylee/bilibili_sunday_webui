@@ -317,8 +317,29 @@ function download_urls() {
 	}
 }
 
+function global_keypress(e) {
+	var key = (window.event) ? event.keyCode : e.keyCode; 
+	var str = String.fromCharCode(key)
+
+	if (str == 'h')
+		hide_urls()
+	else if (str == 's')
+		show_urls()
+	else if (str == 'e')
+		encode_urls()
+	else if (str == 'l')
+		load_urls()
+	else if (str == 'c')
+		clear_urls()
+	else if (str == 'd')
+		download_urls()
+	else if (str == 'r')
+		retry()
+}
+
 $(document).ready(function() {
 	$('#url-input-form').submit(on_url_submit)
 	$('#url-search-input').keyup(on_search_change)
+	$(document).keypress(global_keypress)
 	reload_urls()
 })
