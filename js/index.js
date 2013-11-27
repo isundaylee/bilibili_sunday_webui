@@ -26,6 +26,18 @@ function urls_list_name() {
 	}
 }
 
+function get_add_url() {
+	var url = window.location.search.substring(1)
+	var vars = url.split('&')
+
+	for (var i=0; i<vars.length; i++) {
+		var ps = vars[i].split('=')
+
+		if (ps[0] == 'a')
+			return ps[1]
+	}
+}
+
 function retry() {
 	if (window.confirm('Really want us to work all over again??? '))
 	{
@@ -366,4 +378,8 @@ $(document).ready(function() {
 	$('input').on("keyup", input_keyup)
 
 	reload_urls()
+
+	if (get_add_url()) {
+		goto_url(get_add_url())
+	}
 })
