@@ -198,7 +198,7 @@ function update_status_quick(cid, c) {
 	rpc_call('query_status', [cid], function(data) {
 		if (c != counter) return
 		if (data.result.status == 'complete')
-			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=' + gtitle + '">complete</a>' + ' <a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
+			$('#status').html('<a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=【BiliBili】' + gtitle + '">complete</a>' + ' <a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
 		else
 			$('#status').html(data.result.status)
 		var pct
@@ -232,7 +232,7 @@ function update_status(cid, c) {
 		ginit = true
 		$('#progresses').html('')
 		if (data.result.status == 'complete')
-			$('#status').html('<a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=' + gtitle + '">complete</a>' + ' <a download="' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
+			$('#status').html('<a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=【BiliBili】' + gtitle + '">complete</a>' + ' <a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
 		else
 			$('#status').html(data.result.status)
 		for (var i=0; i<data.result.downloads.length; i++) {
