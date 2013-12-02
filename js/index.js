@@ -38,6 +38,19 @@ function get_add_url() {
 	}
 }
 
+
+function get_display() {
+	var url = window.location.search.substring(1)
+	var vars = url.split('&')
+
+	for (var i=0; i<vars.length; i++) {
+		var ps = vars[i].split('=')
+
+		if (ps[0] == 'd')
+			return ps[1]
+	}
+}
+
 function retry() {
 	if (window.confirm('Really want us to work all over again??? '))
 	{
@@ -366,6 +379,10 @@ function input_keyup(event) {
 		$(this).blur()
 }
 
+function hide_to_minify() {
+	$('body > *').not('.minip').hide()
+}
+
 $(document).ready(function() {
 	$('#url-input-form').submit(on_url_submit)
 	$('#url-search-input').keyup(on_search_change)
@@ -381,5 +398,9 @@ $(document).ready(function() {
 
 	if (get_add_url()) {
 		goto_url(get_add_url())
+	}
+
+	if (get_display() == 'm') {
+		hide_to_minify()
 	}
 })

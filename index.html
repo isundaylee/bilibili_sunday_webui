@@ -9,7 +9,7 @@
     <script src="js/modernizr.js"></script>
   </head>
   <body>
-    <nav class="top-bar" data-topbar>
+    <nav class="top-bar minip" data-topbar>
       <ul class="title-area">
         <li class="name">
           <h1><a href="#">Bilibili Sunday (((o(*ﾟ▽ﾟ*)o)))ノ! </a></h1>
@@ -17,9 +17,9 @@
       </ul>
     </nav>
 
-    <div class="divider"></div>
+    <div class="divider minip" id="top-divider-row"></div>
 
-    <div class="row">
+    <div class="row" id="url-input-row">
       <div class="small-12 column">
         <form id="url-input-form">
           <input id="url-input" type="text" placeholder="Bilibili video URL. " />
@@ -27,25 +27,25 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row minip" id="title-row">
       <div class="small-12 column">
         <h3 id="title">Welcome to Bilibili Sunday (((o(*ﾟ▽ﾟ*)o)))ノ! </h3>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row minip" id="status-row">
       <div class="small-12 column">
         <h4 id="status">active</h4>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row minip" id="progresses-row">
       <div class="small-12 column" id="progresses">
 
       </div>
     </div>
 
-    <div class="row" id="retry-button-panel">
+    <div class="row minip" id="retry-button-panel">
       <div class="small-12 column">
         <a href="javascript: retry(); " class="button alert" id="retry-btn">Retry</a>
       </div>
