@@ -9,7 +9,7 @@ ginit = false
 Storage.prototype.setObject = function(key, value) {
     this.setItem(key, JSON.stringify(value));
 }
- 
+
 Storage.prototype.getObject = function(key) {
     return JSON.parse(this.getItem(key));
 }
@@ -55,7 +55,7 @@ function retry() {
 	if (window.confirm('Really want us to work all over again??? '))
 	{
 		if (gcid == 0) {
-			return; 
+			return;
 		}
 
 		clearInterval(itv)
@@ -115,8 +115,8 @@ function download(key, callback) {
 
 function rpc_call(method, params, callback) {
 	var data = {
-		id: 'bilibili_sunday_webui', 
-		method: 'bilibili_sunday.' + method, 
+		id: 'bilibili_sunday_webui',
+		method: 'bilibili_sunday.' + method,
 		params: Base64.encode(JSON.stringify(params))
 	}
 
@@ -127,7 +127,7 @@ function rpc_call(method, params, callback) {
 
 function load_url(url) {
 	counter = counter + 1
-		
+
 	rpc_call('cid_for_video_url', [url], function(data) {
 		load_cid(data.result, counter)
 	})
@@ -145,7 +145,7 @@ function goto_url(url)
 
 function reload_urls()
 {
-	var urls = getURLs(); 
+	var urls = getURLs();
 	$('#urls').html('')
 
 	console.log(urls)
@@ -170,7 +170,7 @@ function update_urls()
 	if (gcid == 0 || gtitle == '')
 		return
 
-	var urls = getURLs(); 
+	var urls = getURLs();
 
 	for (var i=0; i<urls.length; i++) {
 		if (urls[i].cid == gcid)
@@ -179,7 +179,7 @@ function update_urls()
 
 	urls.push({url: gurl, cid: gcid, title: gtitle})
 
-	setURLs(urls); 
+	setURLs(urls);
 
 	reload_urls()
 }
@@ -190,7 +190,7 @@ function load_title(title, c) {
 	gtitle = title
 
 	if (!ginit && gcid != 0)
-		update_status(gcid, c) 
+		update_status(gcid, c)
 
 	update_urls()
 }
@@ -211,13 +211,13 @@ function update_status_quick(cid, c) {
 	rpc_call('query_status', [cid], function(data) {
 		if (c != counter) return
 		if (data.result.status == 'complete')
-			$('#status').html('<a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=【BiliBili】' + gtitle + '">complete</a>' + ' <a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
+			$('#status').html('<a download="【BiliBili】' + gtitle + '.flv" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=【BiliBili】' + gtitle + '">complete</a>' + ' <a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
 		else
 			$('#status').html(data.result.status)
 		var pct
 		for (var i=num; i<data.result.downloads.length; i++) {
 			pct = Math.floor(100 * data.result.downloads[i].status.progress) + '%'
-			$('#progresses').append('<div class="progress"><div class="meter" style="width: ' + pct + '" id="progress' + i + '"></div></div>') 
+			$('#progresses').append('<div class="progress"><div class="meter" style="width: ' + pct + '" id="progress' + i + '"></div></div>')
 		}
 		for (var i=0; i<data.result.downloads.length; i++) {
 			pct = Math.floor(100 * data.result.downloads[i].status.progress) + '%'
@@ -234,7 +234,7 @@ function update_status_quick(cid, c) {
 				$('#progresso' + i).removeClass('alert success error')
 		}
 		num = data.result.downloads.length
-	})	
+	})
 }
 
 function update_status(cid, c) {
@@ -245,11 +245,11 @@ function update_status(cid, c) {
 		ginit = true
 		$('#progresses').html('')
 		if (data.result.status == 'complete')
-			$('#status').html('<a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=【BiliBili】' + gtitle + '">complete</a>' + ' <a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
+			$('#status').html('<a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.path) + '&filename=【BiliBili】' + gtitle + '.flv">complete</a>' + ' <a download="【BiliBili】' + gtitle + '" href="' + 'http://ljh.me/direct_access.php?path=' + encodeURIComponent(data.result.comments_path) + '">comments</a>')
 		else
 			$('#status').html(data.result.status)
 		for (var i=0; i<data.result.downloads.length; i++) {
-			var pct 
+			var pct
 			pct = Math.floor(100 * data.result.downloads[i].status.progress) + '%'
 			if (data.result.downloads[i].status.status == 'waiting' || data.result.downloads[i].status.status == 'error')
 				pct = '100%'
@@ -282,7 +282,7 @@ function getURLs() {
 	// 	})
 	// 	return URLs
 	// }	else {
-		return localStorage.getObject('urls') || []; 
+		return localStorage.getObject('urls') || [];
 	// }
 }
 
@@ -291,12 +291,12 @@ function setURLs(urls) {
 	// 	upload(urls_list_name(), JSON.stringify(urls), function(content) {})
 	// 	URLs = urls
 	// }	else {
-		localStorage.setObject('urls', urls); 
+		localStorage.setObject('urls', urls);
 	// }
 }
 
 function on_url_submit() {
-	var urls = getURLs(); 
+	var urls = getURLs();
 	var url = $.trim($('#url-input').val())
 	$('#title').html('')
 	$('#progresses').html('')
@@ -343,7 +343,7 @@ function download_urls() {
 }
 
 function global_keyup(e) {
-	var key = (window.event) ? event.keyCode : e.keyCode; 
+	var key = (window.event) ? event.keyCode : e.keyCode;
 	var str = String.fromCharCode(key).toLowerCase()
 
 	if ($("input:focus").length == 0) {
@@ -373,7 +373,7 @@ function global_keyup(e) {
 }
 
 function input_keyup(event) {
-	var key = (window.event) ? event.keyCode : e.keyCode; 
+	var key = (window.event) ? event.keyCode : e.keyCode;
 
 	if (key == 27)
 		$(this).blur()
